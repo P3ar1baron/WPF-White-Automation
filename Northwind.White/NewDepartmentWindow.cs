@@ -12,21 +12,30 @@ using TestStack.White.Utility;
 
 namespace Northwind.White
 {
-    public class NewDepartmentWindow
+    public class NewDepartmentWindow : WindowObject
+
     {
-        private Window _window;
+    private Window _window;
 
-        public NewDepartmentWindow(Application application)
-        {
-            Window _window = Retry.For(
-                () => application.GetWindows().First(x => x.Title.Contains("New department")),
-                TimeSpan.FromSeconds(5));
-        }
+    private TextBox NameTextBox
+    {
+        get { return TextBox(); }
+    }
 
-        public void CreateDepartment(string name)
-        {
-            _window.Get<TextBox>().Text = name;
-            _window.Get<Button>(SearchCriteria.ByText("OK")).Click();
-        }
+    private Button OkButton
+    {
+        get { return Button("OK"); }
+    }
+
+    internal NewDepartmentWindow(Window window) : base(window)
+    {
+        _window = window;
+    }
+
+    public void CreateDepartment(string name)
+    {
+        NameTextBox.Text = name;
+        OkButton.Click();
+    }
     }
 }

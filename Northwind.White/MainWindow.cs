@@ -7,22 +7,18 @@ using Xunit;
 
 namespace Northwind.White
 {
-    public class MainWindow
+    public class MainWindow : WindowObject
     {
         private Window _window;
 
         private ListItem DepartmentsTab
         {
-            get
-            {
-                var listBox = _window.Get<ListBox>();
-                return listBox.Item("Departments");
-            }
+            get { return ListBox().Item("Departments"); }
         }
 
         private Button AddButton
         {
-            get { return _window.Get<Button>(SearchCriteria.ByText("Add")); }
+            get { return Button("Add"); }
         }
 
         private ListView DataGrid
@@ -30,9 +26,9 @@ namespace Northwind.White
             get { return _window.Get<ListView>(); }
         }
 
-        public MainWindow(Application application)
+        internal MainWindow(Window window) : base(window)
         {
-            _window = application.GetWindow("Northwind");
+            _window = window;
         }
 
         public void AddDepartment()

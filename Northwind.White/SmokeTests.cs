@@ -10,18 +10,12 @@ namespace Northwind.White
         [Fact]
         public void Can_add_a_department()
         {
-            //Application application = Application.Launch(
-            //    @"C:\Users\Vlad\Desktop\1-wpf-exercise-files\Northwind\Northwind.UI\bin\Debug\Northwind.UI.exe");
-            //Windows.Init(application);
+            Windows.Main.AddDepartment();
+            Windows.NewDepartment.CreateDepartment("Automation Department");
 
-            //var mainWindow = new MainWindow(window);
-            //mainWindow.AddDepartment();
-
-            //var newDepartmentWindow = new NewDepartmentWindow(application);
-            //newDepartmentWindow.CreateDepartment("Automation Department");
-
-            //bool isDepartmentInList = mainWindow.IsDepartmentInList("Automation Department");
-            //Assert.True(isDepartmentInList,"Created department is not in the list");
+            Assert.True(
+                Windows.Main.IsDepartmentInList("Automation Department"),
+                "Created department is not in the list");
         }
     }
 }
